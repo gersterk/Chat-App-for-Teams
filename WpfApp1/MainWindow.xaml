@@ -1,0 +1,299 @@
+﻿<Window x:Class="WpfApp1.MainWindow" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1" xmlns:view="clr-namespace:WpfApp1.MAIN.View"
+        mc:Ignorable="d"
+        Height="741" Width="1278"
+        Background = "#edf6f9"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip">
+
+
+    <Window.DataContext>
+
+        <view:MainViewModel/>
+
+    </Window.DataContext>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+
+
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+
+
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+
+
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.ColumnSpan="2"
+                Background="#0a9396"
+                MouseDown="Border_MouseDown">
+
+            <Grid HorizontalAlignment="Stretch">
+                <Label Content ="AHOJ"
+                       Foreground="Black"
+                       FontSize="15"
+                       Margin="5,1,0,0"
+                       FontWeight="DemiBold"/>
+                <StackPanel HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+
+                    <Button Width="30" Height="30"
+                            Content="&#x2014;"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground ="White"
+                            FontWeight="SemiBold" 
+                            
+                            Click="ButtonMinimize_Click"/>
+
+
+                    <Button Width="30" Height="30"
+
+                            Content="&#x25A2;"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground ="White"
+                            FontSize="15"
+                            FontWeight="ExtraBold"
+                            
+                            
+                            
+                            Click="WindowStateButton_Click"/>
+
+
+
+                    <Button Width="30" Height="30"
+                            Content="X"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground ="White"
+                            FontSize="15"
+                            FontWeight="DemiBold"
+                            Margin="0,0,5,0"
+                            Click="CloseButton_Click"/>
+
+
+
+
+
+
+                </StackPanel>
+
+
+
+
+            </Grid>
+
+        </Border>
+
+
+
+
+        <Grid Background="#edf2f4"
+             Grid.Row = "1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Contacts"
+                   VerticalAlignment="Center"
+                   FontWeight="Medium"
+                   Foreground="Black"
+                   Margin="5,0,0,0"/>
+            <ListView ItemsSource="{Binding Contacts}"
+                      SelectedItem="{Binding SelectedContact}"
+                      Background="Transparent"
+                      BorderThickness="0"
+                      Grid.Row ="1"
+                      ItemContainerStyle= "{StaticResource ContactCard}" />
+
+            <StackPanel Grid.Row="2"
+                        Orientation="Horizontal"
+                        Background="#0a9396">
+
+
+                <Border CornerRadius="25"
+                        Width="30"
+                        Height="30"
+                        Background="#10316B"
+                        Margin="18,0,0,0" />
+                <StackPanel
+                    VerticalAlignment="Center"/>
+
+                <Label
+                    Content="@username"
+                    Foreground="Black"
+                    FontWeight="SemiBold"
+                    Margin="0,10,0,0"/>
+                <Label
+                    Content="Costum Status"
+                    Foreground="White"
+                    FontWeight="SemiBold"
+                    FontSize="8"
+                    Margin="-74,25,0,0"/>
+
+
+
+            </StackPanel>
+
+
+        </Grid>
+
+        <Grid Grid.Column="1"
+              Grid.Row = "2">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+
+            <Border BorderBrush="#a8dadc"
+                    BorderThickness="0,0,0,2">
+                <Grid HorizontalAlignment="Stretch"
+                      Margin="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="74*"/>
+                        <ColumnDefinition Width="103*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="{Binding SelectedContact.Username}"
+                           Foreground="Black"
+                           FontWeight="Bold"
+                           Margin="5,0,5,0"
+                           VerticalAlignment="Center" Grid.ColumnSpan="3"/>
+
+
+
+                    <StackPanel     Orientation="Horizontal"
+                                    Margin="-8,43,-8,-565" Cursor="Hand" Grid.ColumnSpan="2">
+
+                        <ListView ItemsSource = "{Binding SelectedContact.Messages}"
+                              Background="Transparent"
+                              BorderBrush="Transparent"
+                              ItemContainerStyle="{StaticResource cItem}"
+                              Grid.ColumnSpan="1" Width="1043"/>
+
+
+
+
+                        <!--Grid.ColumnSpan="1"-->
+
+                        <!--<Label Content="{Binding Message}"
+                               Foreground="Black"
+                               FontWeight="SemiBold"
+                               HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Height="448" Width="446" Margin="-1500,40,0,0"/>-->
+
+
+
+
+
+                    </StackPanel>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <Grid Margin="8,676,-8,-658" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="46" />
+                            <ColumnDefinition  />
+                            <ColumnDefinition Width="453*"/>
+                            <ColumnDefinition Width="55*"/>
+                        </Grid.ColumnDefinitions>
+
+
+
+                        <TextBox
+                                 Text="Message @Username"
+                                 FontSize="13"
+                                 Style= "{StaticResource MessageBox}" 
+                                 Margin="-16,-37,0,-8" 
+                                 Grid.ColumnSpan="4"/>
+
+
+                        <StackPanel Orientation="Horizontal"                                    
+                                    HorizontalAlignment="Center"
+                                    Grid.Column="3"
+                                    Background="Transparent"
+
+                                    Margin="0,-37,0,-8" Width="80">
+
+
+
+                            <Image Source="./Icons/send.png"
+                                   Height="30"
+                                   Width="30"
+                                   RenderOptions.BitmapScalingMode="Fant"
+                                   Margin="5,0,5,0"/>
+
+                            <Image Source="./Icons/plus.png"
+                                   Height="27"
+                                   Width="27"
+                                   RenderOptions.BitmapScalingMode="Fant"
+                                   Margin="5,0,15,0"/>
+
+
+
+
+
+
+                        </StackPanel>
+
+
+
+                    </Grid>
+
+
+
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Left" Grid.Column="1" Margin="528,0,0,0">
+                        <Image Width="30" Height="30" 
+                               RenderOptions.BitmapScalingMode="Fant"
+                               Margin="5,0,5,0"
+                               Source="./Icons/call.png"/>
+                        <Image Width="30" Height="30" 
+                               RenderOptions.BitmapScalingMode="Fant"
+                               Margin="5,0,15,0"
+                               Source="./Icons/video.png"/>
+
+
+
+                    </StackPanel>
+
+                </Grid>
+
+            </Border>
+
+        </Grid>
+
+    </Grid>
+</Window>
